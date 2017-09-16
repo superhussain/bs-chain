@@ -7,15 +7,23 @@
   "scripts": {
     "dev": "node build/dev-server.js",
     "start": "node build/dev-server.js",
-    "build": "node build/build.js"
+    "build": "node build/build.js",
+    "prod": "npm run build && node app.js"
   },
   "dependencies": {
+    "body-parser": "^1.18.1",
+    "errorhandler": "^1.5.0",
+    "express-session": "^1.15.5",
+    "logger": "0.0.1",
     "moment": "^2.18.1",
+    "passport": "^0.4.0",
+    "passport-coinbase": "^0.1.2",
     "socket.io": "^2.0.3",
     "socket.io-client": "^2.0.3",
     "vue": "^2.2.2",
     "vue-router": "^2.3.0",
-    "vuex": "^2.3.0"
+    "vuex": "^2.3.0",
+    "watson-developer-cloud": "^2.39.0"
   },
   "devDependencies": {
     "autoprefixer": "^6.7.2",
