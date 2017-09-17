@@ -64,7 +64,7 @@ passport.deserializeUser(function (obj, done) {
 passport.use(new CoinbaseStrategy({
   clientID: COINBASE_CLIENT_ID,
   clientSecret: COINBASE_CLIENT_SECRET,
-  callbackURL: "http://127.0.0.1:5000/auth/coinbase/callback",
+  callbackURL: "http://bs-chain.com/auth/coinbase/callback",
   scope: ["user"]
 },
   function (accessToken, refreshToken, profile, done) {
@@ -151,72 +151,6 @@ app.get('/logout', function (req, res) {
   req.logout();
   res.redirect('/');
 });
-
-// Get token from Watson using your credentials
-// app.get('/token', function (req, res) {
-//   authorization.getToken({
-//     url: credentials.url
-//   }, function (err, token) {
-//     if (err) {
-//       console.log('error:', err);
-//       res.status(err.code);
-//     }
-//     res.send(token);
-//   });
-// });
-
-// var mt_credentials = extend({
-//   url: 'https://gateway.watsonplatform.net/language-translation/api',
-//   username: "4b2ee4f8-03c6-4637-a04c-a3e170999a9a",
-//   password: "qMbwHMdULtBm",
-//   version: 'v2'
-// }, bluemix.getServiceCreds('language-translation')); // VCAP_SERVICES
-
-// var language_translation = watson.language_translation(mt_credentials);
-
-// app.post('/api/translate', function (req, res, next) {
-//   //console.log('/v2/translate');
-
-//   var params = extend({
-//     'X-WDC-PL-OPT-OUT': req.header('X-WDC-PL-OPT-OUT')
-//   }, req.body);
-//   //console.log(' ---> params == ' + JSON.stringify(params)); //L.R.
-
-//   language_translation.translate(params, function (err, models) {
-//     if (err)
-//       return next(err);
-//     else
-//       res.json(models);
-//   });
-// });
-// // ----------------------------------------------------------------------
-
-// // L.R.
-// // -------------------------------- TTS ---------------------------------
-// var tts_credentials = extend({
-//   url: 'https://stream.watsonplatform.net/text-to-speech/api',
-//   version: 'v1',
-//   username: "bc632dc3-e824-4978-91be-ba768307db40",
-//   password: "z8ZupzmYPKY2"
-// }, bluemix.getServiceCreds('text_to_speech'));
-
-// // Create the service wrappers
-// var textToSpeech = watson.text_to_speech(tts_credentials);
-
-// app.get('/synthesize', function (req, res) {
-//   var transcript = textToSpeech.synthesize(req.query);
-//   transcript.on('response', function (response) {
-//     if (req.query.download) {
-//       response.headers['content-disposition'] = 'attachment; filename=transcript.ogg';
-//     }
-//   });
-//   transcript.on('error', function (error) {
-//     console.log('Synthesize error: ', error)
-//   });
-//   transcript.pipe(res);
-// });
-
-// ----------------------------------------------------------------------
 
 // Add error handling in dev
 if (!process.env.VCAP_SERVICES) {
