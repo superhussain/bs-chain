@@ -13,8 +13,53 @@
       <div class="wrapper">
         <h2>What is BS Chain?</h2>
         <hr>
-        <p>Tumblr dolore PBR&B, art party meggings squid venmo photo booth cliche sriracha readymade thundercats bitters roof party try-hard. Mlkshk chicharrones cillum, palo santo marfa polaroid YOLO four dollar toast consequat freegan. You probably haven't heard of them tumblr swag, bicycle rights man bun adipisicing selvage. Schlitz edison bulb sed anim, post-ironic hammock pour-over roof party exercitation shaman fashion axe neutra pork belly four loko. Next level raw denim slow-carb forage. La croix semiotics umami eiusmod you probably haven't heard of them, waistcoat beard officia sunt sed chicharrones pinterest drinking vinegar occaecat. Seitan tumeric keytar fingerstache. Leggings quis reprehenderit, farm-to-table deserunt aliquip copper mug ennui cold-pressed incididunt. In cloud bread freegan nostrud yr jean shorts fugiat scenester.</p>
-        <p>Readymade bushwick locavore consequat YOLO pinterest aliquip godard palo santo wolf. Swag authentic four loko chillwave, fugiat ea vape subway tile cred. Crucifix kinfolk copper mug four loko tousled fam mumblecore semiotics marfa vape raw denim keytar mlkshk live-edge. Marfa lyft glossier 90's helvetica gastropub street art iceland. Cray edison bulb mustache helvetica jean shorts truffaut stumptown try-hard unicorn whatever church-key butcher readymade ethical. Drinking vinegar consectetur dolor adipisicing vegan gastropub. Crucifix excepteur shoreditch plaid. Poke aute gastropub, banjo normcore drinking vinegar chambray magna paleo marfa vexillologist pok pok. Keytar flexitarian vice salvia meh. Fugiat mlkshk organic roof party freegan tbh actually duis tilde do nostrud trust fund. Tattooed sustainable tofu sriracha drinking vinegar raw denim kickstarter mlkshk jean shorts letterpress keffiyeh subway tile semiotics sed copper mug. Lo-fi retro ullamco, quinoa woke affogato pork belly.</p>
+        <h3>Inspiration</h3>
+        <p>We started off with a medical application to be put on blockchain but came across a much more fun, much more crazy idea! What is this winning idea you ask? Let me explain. We know a lot of people that love to b.s. casually, so we wanted to build an app to hold them accountable. Thus BS Chain was born! BS Chain allows individuals to put their money where their mouth is, get rewarded in return and shame those who deserve it.</p>
+
+        <p>Hosted at: <a href="http://bs-chain.com">bs-chain.com</a></p>
+        <p><em>"Lose more than just respect."</em></p>
+
+        <h3>What it does</h3>
+        <p>The web app allows a user to login with their Coinbase credentials, record their friend's BS arguments. The argument is recorded on the blockchain and a betting round is opened. Nearby friends can chime in and bet on the validity of the BS using an invite link. The fact is validated and the winning parties are rewarded with a handsome payout.</p>
+
+        <h3>How we built it</h3>
+        <p><strong>Sukhpal</strong></p>
+        <p>I worked on the back end of the project creating the required endpoints and track the user data. I also worked with IBM Hyperledger to include blockchain technology.</p>
+
+        <p><strong>Hussain</strong></p>
+        <p>I worked on the front-end of BS Chain. The sexy design you see in front of you is only made possible by yours truly. I used a Nodejs and Express backend for serving the client side Vue.js application. State of the application is handled using Vuex, a Flux based philosophy of managing application state. I also through the app on a t2.micro AWS instance and pointed the domain's A records to the webserver. Speech to text was also implemented using the new web Speech Recognition API.</p>
+
+        <h3>Challenges we ran into</h3>
+        <ol>
+          <li>Right of the bat, we found out on the Saturday morning that IBM Hyperledger had discontinued their Free Plan for Blockchain. After having to wrestle and deploy the required containers for ourselves, we finally got it up and running.</li>
+          <li>Worked with SQL database like CockroachDB only once before. Setting it up reminded me of why I didn't like it initially.</li>
+          <li>We also came across a few different bugs when working with the Coinbase merchant profile. After talking with the representatives from Coinbase, we were able to work our way through these challenges and successfully implement their API.</li>
+          <li>The new Web Speech Recognition API doesn't have many examples around the web so it was tough to know if things were setup correctly, but after a bit of tinkering, the speech to text accuracy turned out to be pretty fantastic!!</li>
+        </ol>
+
+        <h3>Accomplishments that I'm proud of</h3>
+        <ol>
+          <li>We got it done!</li>
+          <li>Actually got CoinBase working after initially running into bugs like, "Please fill out Merchant Profile" even though there was nothing left to fill out.</li>
+          <li>The sheer number of different views and states to manage for different kinds of users, using a client-side only implementation. </li>
+        </ol>
+
+        <h3>What we learned</h3>
+        <ol>
+          <li>Always keep the idea small because during the weekend it will snowball and become huuuugely difficult to accomplish.</li>
+          <li>Front-end design is noooot easy.</li>
+          <li>The Web Speech Recognition API is freaking amazing!!</li>
+        </ol>
+
+        <h3>What's next for BS Chain</h3>
+        <p>We are trying to extend it to support:</p>
+        <ol>
+          <li>More parallel bet sessions</li>
+          <li>Ratio based payout system</li>
+          <li>Add public viewing system (people that can watch but do not want to bet)</li>
+          <li>Crowd sourced fact collection</li>
+          <li>Rolling out our own ICO (BS Coin!)</li>
+        </ol>
       </div>
     </section>
   </main>
@@ -89,7 +134,7 @@
       border-top 4px solid $yellow
       margin 1em 0 3em
       width 100px
-    p
+    p, ol, li, em
       font-weight 300
 
 

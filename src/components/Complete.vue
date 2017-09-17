@@ -47,6 +47,7 @@ export default {
       return this.$store.getters.getBetResult
     },
     isWinner () {
+      console.log(this.result)
       return this.result && parseInt(this.result) > 0
     }
   },
@@ -73,18 +74,14 @@ export default {
       .then((response) => {
         console.log(response.data)
 
-        localStorage.removeItem('betValue')
-        localStorage.removeItem('betText')
-        localStorage.removeItem('betId')
-        localStorage.removeItem('betAnswer')
-        localStorage.removeItem('betResult')
-
-        if (response.data.output) {
+        if (response.data) {
           this.setBetResult(response.data.output)
-        }
 
-        if (response.data.value) {
-          this.setBetResult(response.data.value)
+          localStorage.removeItem('betValue')
+          localStorage.removeItem('betText')
+          localStorage.removeItem('betId')
+          localStorage.removeItem('betAnswer')
+          localStorage.removeItem('betResult')
         }
       })
       .catch((err) => {
