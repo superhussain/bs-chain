@@ -32,7 +32,8 @@ export default {
   },
   methods: {
     ...mapActions([
-      'setBetValue'
+      'setBetValue',
+      'setBetId'
     ]),
     submitBetValue (event) {
       event.preventDefault()
@@ -43,6 +44,9 @@ export default {
       // betvalue route
       // redirect to timer page
     }
+  },
+  mounted () {
+    this.setBetId(this.$route.params.bet_id)
   }
 }
 </script>

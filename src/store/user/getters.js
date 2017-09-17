@@ -1,5 +1,5 @@
 export default {
   getUser (state, getters) {
-    return state.id
+    return state.id || localStorage.getItem('betUser')
   }
 }

@@ -1,0 +1,11 @@
+export default {
+  setBetValue ({ commit }, value) {
+    commit('SET_BET_VALUE', value)
+  },
+  setText ({ commit }, text) {
+    commit('SET_TEXT', text)
+  },
+  setBetId ({ commit }, id) {
+    commit('SET_BET_ID', id)
+  }
+}

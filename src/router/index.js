@@ -4,6 +4,7 @@ import Router from 'vue-router'
 import Home from '@/components/Home'
 import Record from '@/components/Record'
 import BetValue from '@/components/BetValue'
+import Bet from '@/components/Bet'
 
 Vue.use(Router)
 
@@ -23,6 +24,11 @@ export default new Router({
       path: '/bet-value/:bet_id',
       name: 'BetValue',
       component: BetValue
+    },
+    {
+      path: '/bet/:bet_id',
+      name: 'Bet',
+      component: Bet
     }
   ]
 })

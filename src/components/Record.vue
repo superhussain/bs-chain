@@ -203,6 +203,15 @@
     margin 1em 0
     font-size 1.2em
 
+  .text
+    background-color rgba(#222, 0.7)
+    display inline-block
+    padding 1em
+    margin: 1em 0
+    font-size 1.2em
+    font-style italic
+
+
 @keyframes floating
   from
     transform: translate(0, 0px) rotateY(-12deg);
