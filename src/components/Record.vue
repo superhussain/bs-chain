@@ -26,7 +26,10 @@
   import { mapActions } from 'vuex'
 
   // eslint-disable-next-line
-  const speechRec = new webkitSpeechRecognition()
+  const SpeechRecognition = SpeechRecognition || webkitSpeechRecognition
+
+  // eslint-disable-next-line
+  const speechRec = new SpeechRecognition()
 
   export default {
     name: 'Record',

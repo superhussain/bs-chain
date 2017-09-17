@@ -59,7 +59,7 @@ export default {
       console.log('Socket open.', message)
     }
     socket.onmessage = (message) => {
-      console.log('Socket server message', message)
+      // console.log('Socket server message', message)
       const timeElapsed = parseInt(JSON.parse(message.data).output)
       if (timeElapsed) {
         this.subtractTime(timeElapsed)

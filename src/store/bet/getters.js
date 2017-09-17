@@ -12,6 +12,6 @@ export default {
     return state.answer || localStorage.getItem('betAnswer')
   },
   getBetResult (state, getters) {
-    return state.result || localStorage.getItem('betResult')
+    return state.result
   }
 }

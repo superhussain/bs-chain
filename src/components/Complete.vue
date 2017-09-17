@@ -7,18 +7,17 @@
         </div>
       </h1>
 
-      <div v-if="result">
-        <div v-if="isWinner" class="complete-message complete-message--winner">
-          <h2>Congratulations!</h2>
-          <p>You were correct in your bet and have just awarded yourself <strong>${{ result }}</strong>! Use it wisely!</p>
-          <h3 class="bounty">+ ${{ result }}</h3>
-          <button class="play-again-button" @click="playAgain">Play again?</button>
-        </div>
-        <div v-else class="complete-message complete-message--loser">
-          <h2>Try again next time!</h2>
-          <p>The BS was strong in this one, but you win some, you lose some.</p>
-          <button class="play-again-button" @click="playAgain">Give it another go?</button>
-        </div>
+      <div v-if="result === '2'" class="complete-message complete-message--winner">
+        <h2>Congratulations!</h2>
+        <p>You were correct in your bet and have just awarded yourself <strong>${{ result }}</strong>! Use it wisely!</p>
+        <h3 class="bounty">+ ${{ result }}</h3>
+        <button class="play-again-button" @click="playAgain">Play again?</button>
+      </div>
+
+      <div v-else class="complete-message complete-message--loser">
+        <h2>Try again next time!</h2>
+        <p>The BS was strong in this one, but you win some, you lose some.</p>
+        <button class="play-again-button" @click="playAgain">Give it another go?</button>
       </div>
     </section>
   </main>
@@ -44,11 +43,7 @@ export default {
       return this.$store.getters.getBetAnswer
     },
     result () {
-      return this.$store.getters.getBetResult
-    },
-    isWinner () {
-      console.log(this.result)
-      return this.result && parseInt(this.result) > 0
+      return this.$store.getters.getBetResult || null
     }
   },
   methods: {
@@ -74,15 +69,13 @@ export default {
       .then((response) => {
         console.log(response.data)
 
-        if (response.data) {
-          this.setBetResult(response.data.output)
+        this.setBetResult(response.data.output)
 
-          localStorage.removeItem('betValue')
-          localStorage.removeItem('betText')
-          localStorage.removeItem('betId')
-          localStorage.removeItem('betAnswer')
-          localStorage.removeItem('betResult')
-        }
+        localStorage.removeItem('betValue')
+        localStorage.removeItem('betText')
+        localStorage.removeItem('betId')
+        localStorage.removeItem('betAnswer')
+        localStorage.removeItem('betResult')
       })
       .catch((err) => {
         console.log(err)
