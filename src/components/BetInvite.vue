@@ -1,32 +1,33 @@
 <template>
-  <main class="bet-value">
+  <main class="bet-invite">
     <section class="hero">
       <h1>
         <div class="hero__title">
           <span class="hero--white">BS</span><span class="hero--yellow">Chain</span>
         </div>
       </h1>
-      <p class="tagline">Place the value of your bet</p>
-      
+      <p class="tagline">Share this bet with your friends!</p>
+
       <label class="input-wrapper">
-        <span>Enter Value</span>
-        <input class="value-input" type="number" v-model="value" placeholder="0" autofocus />
+        <input class="url-input" type="text" :value="url" @click="selectInput" autofocus />
       </label>
 
-      <button class="submit-bet-value" @click="submitBetValue" :disabled="!value || value === 0">Continue</button>
+      <button class="continue-bet" @click="continueBet">Continue</button>
     </section>
   </main>
 </template>
 
 <script>
-// import axios from 'axios'
 import { mapActions } from 'vuex'
 
 export default {
-  name: 'BetValue',
-  data () {
-    return {
-      value: null
+  name: 'BetInvite',
+  computed: {
+    betId () {
+      return this.$store.getters.getBetId
+    },
+    url () {
+      return location.href.replace('bet-invite', 'bet')
     }
   },
   methods: {
@@ -34,14 +35,12 @@ export default {
       'setBetValue',
       'setBetId'
     ]),
-    submitBetValue (event) {
+    selectInput (event) {
+      event.target.select()
+    },
+    continueBet (event) {
       event.preventDefault()
-      if (!this.value || this.value === 0) return
-
-      this.setBetValue(this.value)
-
-      // betvalue route
-      // redirect to timer page
+      this.$router.push('/bet/' + this.betId)
     }
   },
   mounted () {
@@ -66,16 +65,9 @@ export default {
     flex-direction column
     text-align left
     width: 100%
-    max-width 300px
-    margin 5em auto 3em
+    max-width 440px
+    margin 5em auto 2em
     position relative
-    &:before
-      content '$'
-      font-size 1.25em
-      position absolute
-      bottom 0
-      left 0
-      padding 1em 1.25em
     > span
       margin-bottom: 0.75em
       text-transform uppercase
@@ -83,17 +75,17 @@ export default {
       letter-spacing 1px
       font-size 0.85em
 
-  .value-input
+  .url-input
+    text-align center
     width: 100%
     appearance none
     border 2px solid $yellow
-    font-size 1.25em
+    font-size 1.15em
     color $white
     padding 1em 1.25em
-    padding-left 2.5em
     font-weight 400
-    text-transform uppercase
-    letter-spacing 2px
+    // text-transform uppercase
+    // letter-spacing 2px
     display inline-block
     background-color rgba($black, 0.1)
     transition: 300ms ease-in-out
@@ -102,7 +94,7 @@ export default {
     &:focus
       outline: none
 
-  .submit-bet-value
+  .continue-bet
     cursor pointer
     appearance none
     border 2px solid $green

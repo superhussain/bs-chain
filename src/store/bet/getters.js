@@ -7,5 +7,11 @@ export default {
   },
   getBetId (state, getters) {
     return state.id || localStorage.getItem('betId')
+  },
+  getBetAnswer (state, getters) {
+    return state.answer || localStorage.getItem('betAnswer')
+  },
+  getBetResult (state, getters) {
+    return state.result || localStorage.getItem('betResult')
   }
 }

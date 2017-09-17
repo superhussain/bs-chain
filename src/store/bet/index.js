@@ -5,7 +5,9 @@ import mutations from './mutations'
 const state = {
   id: null,
   text: '',
-  value: null
+  value: null,
+  answer: null,
+  result: null
 }
 
 export default {

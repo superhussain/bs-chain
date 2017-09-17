@@ -7,5 +7,11 @@ export default {
   },
   setBetId ({ commit }, id) {
     commit('SET_BET_ID', id)
+  },
+  setBetAnswer ({ commit }, answer) {
+    commit('SET_BET_ANSWER', answer)
+  },
+  setBetResult ({ commit }, result) {
+    commit('SET_BET_RESULT', result)
   }
 }
