@@ -3,7 +3,7 @@ import getters from './getters'
 import mutations from './mutations'
 
 const state = {
-  sentence: 'this is a sentence'
+  id: null
 }
 
 export default {

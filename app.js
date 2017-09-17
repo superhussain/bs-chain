@@ -108,7 +108,11 @@ if (!!process.env.VCAP_SERVICES) {
 }
 
 app.get('/', function (req, res) {
-  res.render('index', { user: req.user });
+  if (req.user && !req.params && !req.params.status) {
+    res.redirect('/?status=success&user=' + req.user.id);
+  } else {
+    res.render('index');
+  }
 });
 
 app.get('/account', ensureAuthenticated, function (req, res) {
@@ -137,10 +141,10 @@ app.get('/auth/coinbase',
 //   login page.  Otherwise, the primary route function function will be called,
 //   which, in this example, will redirect the user to the home page.
 app.get('/auth/coinbase/callback',
-  passport.authenticate('coinbase', { failureRedirect: '/login' }),
+  passport.authenticate('coinbase', { failureRedirect: '/' }),
   function (req, res) {
     console.log(JSON.stringify(req.user));
-    res.redirect('/');
+    res.redirect('/?status=success&user=' + req.user.id);
   });
 
 app.get('/logout', function (req, res) {

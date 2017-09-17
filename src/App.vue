@@ -38,22 +38,10 @@
   #app
     text-align center
     margin 0
-    > main
-      padding 3em
-      text-align left
-      .wrapper
-        width: 100%
-        max-width 1000px
-        margin 0 auto
-      .main-heading
-        display flex
-        align-items flex-end
-        padding-bottom 1.5em
-        span
-          display inline-block
-          color $silver
-          margin-bottom 0.25em
-          margin-left 0.25em
+    .wrapper
+      width: 100%
+      max-width 800px
+      margin 5em auto
 
   .text-heading, h1, h2, h3, h4, h5, h6
     font-family 'Roboto Slab', 'Roboto', Arial, Helvetica, sans-serif
