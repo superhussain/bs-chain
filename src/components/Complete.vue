@@ -72,6 +72,13 @@ export default {
       })
       .then((response) => {
         console.log(response.data)
+
+        localStorage.removeItem('betValue')
+        localStorage.removeItem('betText')
+        localStorage.removeItem('betId')
+        localStorage.removeItem('betAnswer')
+        localStorage.removeItem('betResult')
+
         if (response.data.output) {
           this.setBetResult(response.data.output)
         }

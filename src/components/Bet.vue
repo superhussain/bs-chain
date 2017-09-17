@@ -6,18 +6,29 @@
           <span class="hero--white">BS</span><span class="hero--yellow">Chain</span>
         </div>
       </h1>
+      
+      <div v-if="!user">
+        <div class="iframe-oauth-wrapper">
+          <iframe id="coinbase_inline_iframe_ae60c5e2f0574543b82a3f0d05cfc9ac" src="https://www.coinbase.com/checkouts/ae60c5e2f0574543b82a3f0d05cfc9ac/inline" style="width: 460px; height: 350px; border: none; box-shadow: 0 1px 3px rgba(0,0,0,0.25);" allowtransparency="true" frameborder="0"></iframe>
+        </div>
 
-      <div v-if="text" class="text">"{{ text }}"</div>
-
-      <div class="bet-choices">
-        <input type="radio" name="value" id="bet-choice--true" @change="selectAnswer" />
-        <input type="radio" name="value" id="bet-choice--false" @change="selectAnswer" />
-        <label for="bet-choice--true" class="bet-choice bet-choice--true">True</label>
-        <label for="bet-choice--false" class="bet-choice bet-choice--false">False</label>
+        <button class="skip-button" @click="setUser('dummykeyhere')">Skip (We're cheap)</button>
       </div>
 
-      <button class="submit-bet" @click="submitBet" :disabled="value === null">Submit</button>
-      <div class="button-helper">By clicking submit, you agree to our terms of service and give your consent to withdraw funds from your Coinbase wallet.</div>
+      <div v-else>
+        <div v-if="text" class="text">"{{ text }}"</div>
+
+        <div class="bet-choices">
+          <input type="radio" name="value" id="bet-choice--true" @change="selectAnswer" />
+          <input type="radio" name="value" id="bet-choice--false" @change="selectAnswer" />
+          <label for="bet-choice--true" class="bet-choice bet-choice--true">True</label>
+          <label for="bet-choice--false" class="bet-choice bet-choice--false">False</label>
+        </div>
+
+        <button class="submit-bet" @click="submitBet" :disabled="value === null">Submit</button>
+        <div class="button-helper">By clicking submit, you agree to our terms of service and give your consent to withdraw funds from your Coinbase wallet.</div>
+      </div>
+
     </section>
   </main>
 </template>
@@ -49,7 +60,8 @@ export default {
       'setBetId',
       'setText',
       'setBetAnswer',
-      'setBetResult'
+      'setBetResult',
+      'setUser'
     ]),
     selectAnswer (event) {
       const checkbox = event.target
@@ -122,6 +134,9 @@ export default {
     line-height 1.5
     color rgba($white, 0.7)
 
+  .iframe-oauth-wrapper
+    margin-top 3em
+
   .bet-choices
     display block
     width 100%
@@ -158,6 +173,25 @@ export default {
       background-color $yellow
       color $black
     #bet-choice--false:checked ~ .bet-choice--false
+      background-color $yellow
+      color $black
+
+  .skip-button
+    appearance none
+    cursor pointer
+    appearance none
+    border 2px solid $yellow
+    font-size 1.25em
+    color $white
+    padding 0.75em 1.25em
+    font-weight 400
+    text-transform uppercase
+    letter-spacing 2px
+    margin 1.5em auto 0
+    display inline-block
+    background-color rgba($black, 0.15)
+    transition: 300ms ease-in-out
+    &:hover
       background-color $yellow
       color $black
 
