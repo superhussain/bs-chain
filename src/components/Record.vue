@@ -7,8 +7,8 @@
         </div>
       </h1>
       <p class="tagline">Tell your buddy to repeat his BS!</p>
-      <a v-if="!isRecording" href="" @click="startRecording" class="record-button"><i class="fa fa-microphone-alt"></i></a>
-      <a v-else href="" @click="stopRecording" class="record-button record-button--recording"><i class="fa fa-microphone-alt"></i></a>
+      <button v-if="!isRecording" @click="startRecording" class="record-button"><i class="fa fa-microphone-alt"></i></button>
+      <button v-else @click="stopRecording" class="record-button record-button--recording"><i class="fa fa-microphone-alt"></i></button>
       
       <div v-if="!isRecording" class="button-helper">Click to start recording...</div>
       <div v-else>
@@ -121,6 +121,7 @@
     min-height 100vh
 
   .record-button
+    cursor pointer
     border 5px solid $red
     width 120px
     height 120px
@@ -135,6 +136,7 @@
     display inline-flex
     align-items center
     justify-content center
+    background-color transparent
     transition: 300ms ease-in-out
     &:hover
       background-color $red
