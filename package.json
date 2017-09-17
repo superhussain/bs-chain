@@ -8,7 +8,9 @@
     "dev": "node build/dev-server.js",
     "start": "node build/dev-server.js",
     "build": "node build/build.js",
-    "prod": "npm run build && node app.js"
+    "prod:test": "npm run build && node app.js",
+    "prod": "npm run build && sudo forever start app.js",
+    "prod:stop": "sudo forever stop app.js"
   },
   "dependencies": {
     "axios": "^0.16.2",

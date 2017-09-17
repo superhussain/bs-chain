@@ -5,8 +5,8 @@ var express = require('express'),
   bodyParser = require("body-parser"), //L.R.
   errorhandler = require('errorhandler'),
   session = require('express-session'),
-  bluemix = require('./config/bluemix'),
-  watson = require('watson-developer-cloud'),
+  // bluemix = require('./config/bluemix'),
+  // watson = require('watson-developer-cloud'),
   path = require('path'),
   passport = require('passport'),
   CoinbaseStrategy = require('passport-coinbase').Strategy,
@@ -26,16 +26,16 @@ fs.rename(__dirname + '/dist/index.html', __dirname + '/dist/index.ejs', functio
 
 // For local development, put username and password in config
 // or store in your environment
-var config = {
-  version: 'v1',
-  url: 'https://stream.watsonplatform.net/speech-to-text/api',
-  username: "676a5bd9-8cd8-4d79-8a6c-8790137934d6",
-  password: "P0Lz3XYep07Q"
-};
+// var config = {
+//   version: 'v1',
+//   url: 'https://stream.watsonplatform.net/speech-to-text/api',
+//   username: "676a5bd9-8cd8-4d79-8a6c-8790137934d6",
+//   password: "P0Lz3XYep07Q"
+// };
 
 // if bluemix credentials exists, then override local
-var credentials = extend(config, bluemix.getServiceCreds('speech_to_text'));
-var authorization = watson.authorization(credentials);
+// var credentials = extend(config, bluemix.getServiceCreds('speech_to_text'));
+// var authorization = watson.authorization(credentials);
 
 // Coinbase api token
 var COINBASE_CLIENT_ID = "89471a61cd057bc083ae8b2aa3e131b896682013c25760e3c6e115352049f9db";
@@ -153,68 +153,68 @@ app.get('/logout', function (req, res) {
 });
 
 // Get token from Watson using your credentials
-app.get('/token', function (req, res) {
-  authorization.getToken({
-    url: credentials.url
-  }, function (err, token) {
-    if (err) {
-      console.log('error:', err);
-      res.status(err.code);
-    }
-    res.send(token);
-  });
-});
+// app.get('/token', function (req, res) {
+//   authorization.getToken({
+//     url: credentials.url
+//   }, function (err, token) {
+//     if (err) {
+//       console.log('error:', err);
+//       res.status(err.code);
+//     }
+//     res.send(token);
+//   });
+// });
 
-var mt_credentials = extend({
-  url: 'https://gateway.watsonplatform.net/language-translation/api',
-  username: "4b2ee4f8-03c6-4637-a04c-a3e170999a9a",
-  password: "qMbwHMdULtBm",
-  version: 'v2'
-}, bluemix.getServiceCreds('language-translation')); // VCAP_SERVICES
+// var mt_credentials = extend({
+//   url: 'https://gateway.watsonplatform.net/language-translation/api',
+//   username: "4b2ee4f8-03c6-4637-a04c-a3e170999a9a",
+//   password: "qMbwHMdULtBm",
+//   version: 'v2'
+// }, bluemix.getServiceCreds('language-translation')); // VCAP_SERVICES
 
-var language_translation = watson.language_translation(mt_credentials);
+// var language_translation = watson.language_translation(mt_credentials);
 
-app.post('/api/translate', function (req, res, next) {
-  //console.log('/v2/translate');
+// app.post('/api/translate', function (req, res, next) {
+//   //console.log('/v2/translate');
 
-  var params = extend({
-    'X-WDC-PL-OPT-OUT': req.header('X-WDC-PL-OPT-OUT')
-  }, req.body);
-  //console.log(' ---> params == ' + JSON.stringify(params)); //L.R.
+//   var params = extend({
+//     'X-WDC-PL-OPT-OUT': req.header('X-WDC-PL-OPT-OUT')
+//   }, req.body);
+//   //console.log(' ---> params == ' + JSON.stringify(params)); //L.R.
 
-  language_translation.translate(params, function (err, models) {
-    if (err)
-      return next(err);
-    else
-      res.json(models);
-  });
-});
-// ----------------------------------------------------------------------
+//   language_translation.translate(params, function (err, models) {
+//     if (err)
+//       return next(err);
+//     else
+//       res.json(models);
+//   });
+// });
+// // ----------------------------------------------------------------------
 
-// L.R.
-// -------------------------------- TTS ---------------------------------
-var tts_credentials = extend({
-  url: 'https://stream.watsonplatform.net/text-to-speech/api',
-  version: 'v1',
-  username: "bc632dc3-e824-4978-91be-ba768307db40",
-  password: "z8ZupzmYPKY2"
-}, bluemix.getServiceCreds('text_to_speech'));
+// // L.R.
+// // -------------------------------- TTS ---------------------------------
+// var tts_credentials = extend({
+//   url: 'https://stream.watsonplatform.net/text-to-speech/api',
+//   version: 'v1',
+//   username: "bc632dc3-e824-4978-91be-ba768307db40",
+//   password: "z8ZupzmYPKY2"
+// }, bluemix.getServiceCreds('text_to_speech'));
 
-// Create the service wrappers
-var textToSpeech = watson.text_to_speech(tts_credentials);
+// // Create the service wrappers
+// var textToSpeech = watson.text_to_speech(tts_credentials);
 
-app.get('/synthesize', function (req, res) {
-  var transcript = textToSpeech.synthesize(req.query);
-  transcript.on('response', function (response) {
-    if (req.query.download) {
-      response.headers['content-disposition'] = 'attachment; filename=transcript.ogg';
-    }
-  });
-  transcript.on('error', function (error) {
-    console.log('Synthesize error: ', error)
-  });
-  transcript.pipe(res);
-});
+// app.get('/synthesize', function (req, res) {
+//   var transcript = textToSpeech.synthesize(req.query);
+//   transcript.on('response', function (response) {
+//     if (req.query.download) {
+//       response.headers['content-disposition'] = 'attachment; filename=transcript.ogg';
+//     }
+//   });
+//   transcript.on('error', function (error) {
+//     console.log('Synthesize error: ', error)
+//   });
+//   transcript.pipe(res);
+// });
 
 // ----------------------------------------------------------------------
 
